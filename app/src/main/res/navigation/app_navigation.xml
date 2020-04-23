@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/app_navigation"
+    app:startDestination="@id/habitViewPagerFragment">
+
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.example.habittrackernew.editor.EditorFragment"
+        android:label="EditorFragment" >
+        <argument
+            android:name="habitId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_editorFragment_to_habitViewPagerFragment"
+            app:destination="@id/habitViewPagerFragment"
+            app:popUpTo="@id/habitViewPagerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.example.habittrackernew.about_app.AboutAppFragment"
+        android:label="AboutAppFragment" />
+    <fragment
+        android:id="@+id/habitViewPagerFragment"
+        android:name="com.example.habittrackernew.list_of_habits.HabitViewPagerFragment"
+        android:label="HabitViewPagerFragment" >
+        <action
+            android:id="@+id/action_habitViewPagerFragment_to_editorFragment"
+            app:destination="@id/editorFragment" />
+    </fragment>
+</navigation>
