@@ -9,7 +9,7 @@
         android:label="EditorFragment" >
         <argument
             android:name="habitId"
-            app:argType="integer" />
+            app:argType="string" />
         <action
             android:id="@+id/action_editorFragment_to_habitViewPagerFragment"
             app:destination="@id/habitViewPagerFragment"

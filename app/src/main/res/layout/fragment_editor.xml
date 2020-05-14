@@ -5,16 +5,14 @@
 
     <data>
 
+
         <import type="com.example.habittrackernew.database.HabitType"/>
-        <import type="android.view.View"/>
+
 
         <variable
             name="viewModel"
             type="com.example.habittrackernew.editor.EditorViewModel" />
 
-        <variable
-            name="habit"
-            type="com.example.habittrackernew.database.HabitEntity" />
     </data>
 
     <ScrollView
@@ -57,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:checkedButton="@{habit.type == HabitType.Good ? @id/radioGood : @id/radioBad}">
+                    android:checkedButton="@{viewModel.editableHabit.type == HabitType.Good ? @id/radioGood : @id/radioBad}">
 
                     <RadioButton
                         android:id="@+id/radioGood"
@@ -133,7 +131,7 @@
                             android:hint="@string/hintHabitDescription"
                             android:textColorHint="@color/textHintsColor"
                             android:textSize="18sp"
-                            android:text="@{habit.description}"/>
+                            android:text="@={viewModel.editableHabit.description}"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -169,8 +167,8 @@
                             android:editable="false"
                             android:hint="@string/hintPriority"
                             android:inputType="text"
-                            android:text="@{habit.priority.toString()}"
-                            android:textColorHint="@color/textHintsColor" />
+                            android:textColorHint="@color/textHintsColor"
+                            />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
@@ -205,7 +203,7 @@
                             android:inputType="number"
                             android:textAlignment="center"
                             android:textColorHint="@color/textHintsColor"
-                            android:text='@{viewModel.isNewHabit ? Integer.toString(habit.count) : ""}'/>
+                            android:text='@{viewModel.isNewHabit ? Integer.toString(viewModel.editableHabit.count) : ""}'/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textview.MaterialTextView
@@ -241,8 +239,7 @@
                             android:hint="@string/hintEvery"
                             android:inputType="text"
                             android:textAlignment="center"
-                            android:textColorHint="@color/textHintsColor"
-                            android:text='@{viewModel.isNewHabit ? habit.frequency : ""}'/>
+                            android:textColorHint="@color/textHintsColor"/>
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -257,7 +254,8 @@
                 android:layout_marginRight="16dp"
                 android:text="@string/save"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewDescription" />
+                app:layout_constraintTop_toBottomOf="@+id/cardViewDescription"
+                android:onClick="@{() -> viewModel.saveHabit()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

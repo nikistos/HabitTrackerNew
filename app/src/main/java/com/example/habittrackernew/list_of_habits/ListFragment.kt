@@ -38,7 +38,8 @@ class ListFragment : Fragment() {
     ): View? {
 
         val database = AppDataBase.getInstance(requireContext()).habitDao()
-        val viewModelFactory = ListViewModelFactory(database)
+        val token = resources.getString(R.string.authToken)
+        val viewModelFactory = ListViewModelFactory(database, token)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
 
         binding = DataBindingUtil.inflate(

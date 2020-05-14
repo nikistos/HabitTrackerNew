@@ -10,7 +10,7 @@
             type="com.example.habittrackernew.database.HabitEntity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -29,104 +29,109 @@
             app:strokeColor="@color/highPriorityRed"
             app:strokeWidth="2dp">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="4dp">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/habitName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@{habit.title}"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@string/habitName" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/priority"
-                    android:textSize="8sp"
-                    app:layout_constraintStart_toStartOf="@+id/habitName"
-                    app:layout_constraintTop_toBottomOf="@+id/habitName" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/priorityLetter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/shape_circle"
-                    android:gravity="center"
-                    android:text="P"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/materialTextView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="2dp"
-                    android:text="@string/repeat"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="@+id/habitName"
-                    app:layout_constraintTop_toBottomOf="@+id/habitName"
-                    app:layout_goneMarginTop="2dp" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/repeatCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/shape_circle"
-                    android:gravity="center"
-                    android:text="@{Integer.toString(habit.count)}"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView5"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-                    app:layout_constraintTop_toBottomOf="@+id/materialTextView5" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/high"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView4"
-                    app:layout_constraintTop_toBottomOf="@+id/priorityLetter" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/examplePeriod"
-                    android:textSize="8sp"
-                    app:layout_constraintEnd_toEndOf="@+id/materialTextView5"
-                    app:layout_constraintStart_toStartOf="@+id/materialTextView5"
-                    app:layout_constraintTop_toBottomOf="@+id/repeatCount" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/leftConstraint"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/habitName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@{habit.title}"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/habitName" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/priority"
+                        android:textSize="8sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/habitName" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/priorityLetter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/shape_circle"
+                        android:gravity="center"
+                        android:text="P"
+                        app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView4" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/materialTextView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/repeat"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/habitName"
+                        app:layout_goneMarginTop="2dp" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/repeatCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/shape_circle"
+                        android:gravity="center"
+                        android:text="@{Integer.toString(habit.count)}"
+                        app:layout_constraintEnd_toEndOf="@+id/materialTextView5"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                        app:layout_constraintTop_toBottomOf="@+id/materialTextView5" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/high"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="@+id/materialTextView4"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView4"
+                        app:layout_constraintTop_toBottomOf="@+id/priorityLetter" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/examplePeriod"
+                        android:textSize="8sp"
+                        app:layout_constraintEnd_toEndOf="@+id/materialTextView5"
+                        app:layout_constraintStart_toStartOf="@+id/materialTextView5"
+                        app:layout_constraintTop_toBottomOf="@+id/repeatCount" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_weight="1"
                     android:id="@+id/constraintLayout"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/shape_rectangle_with_circle_side"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/habitName"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintStart_toEndOf="@+id/leftConstraint">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/habitType"
@@ -154,9 +159,10 @@
                         tools:text="@string/exampleDescription" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>
