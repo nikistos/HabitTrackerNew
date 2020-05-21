@@ -163,9 +163,8 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/selector_drop_down_menu"
                             android:filterTouchesWhenObscured="false"
-                            android:editable="false"
                             android:hint="@string/hintPriority"
-                            android:inputType="text"
+                            android:autofillHints="false"
                             android:text="@={EditorBindingMethods.INSTANCE.priorityToText(viewModel.editableHabit.priority)}"
                             android:textColorHint="@color/textHintsColor" />
                     </com.google.android.material.textfield.TextInputLayout>

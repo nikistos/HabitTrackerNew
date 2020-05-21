@@ -1,5 +1,7 @@
 package com.example.habittrackernew.editor
 
+import android.util.Log
+import android.widget.Toast
 import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -26,6 +28,10 @@ class EditorViewModel(database: HabitDao, habitId: String?, token: String) :
     val eventEditionFinished: LiveData<Boolean>
         get() = _eventEditionFinished
 
+    private val _showErrorToast: MutableLiveData<Boolean> = MutableLiveData()
+    val showErrorToast: LiveData<Boolean>
+        get() = _showErrorToast
+
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
@@ -38,10 +44,13 @@ class EditorViewModel(database: HabitDao, habitId: String?, token: String) :
 
     fun saveHabit() = viewModelScope.launch {
         setEditTime()
-        withContext(Dispatchers.IO) {
+        try {
             if (isNewHabit)
                 repository.addHabit(editableHabit)
             else repository.updateHabit(editableHabit)
+            _showErrorToast.value = false
+        } catch (e: Exception) {
+            _showErrorToast.value = true
         }
         _eventEditionFinished.value = true
     }
@@ -49,5 +58,4 @@ class EditorViewModel(database: HabitDao, habitId: String?, token: String) :
     private fun setEditTime() {
         editableHabit.date = (Date().time / 1000).toInt()
     }
-
 }

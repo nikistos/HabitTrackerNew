@@ -34,9 +34,9 @@
         <item>High</item>
     </string-array>
     <string-array name="habitPeriods">
-        <item>day</item>
-        <item>week</item>
-        <item>month</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
     </string-array>
     <string name="authToken">2a895010-243a-48a0-8609-0144ba8e9774</string>
     <string name="atPeriod">AT %s</string>

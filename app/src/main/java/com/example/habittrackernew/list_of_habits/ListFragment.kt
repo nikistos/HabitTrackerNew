@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -48,6 +49,11 @@ class ListFragment : Fragment() {
             container,
             false
         )
+
+        viewModel.showErrorToast.observe(viewLifecycleOwner, Observer { toShow ->
+            if (toShow) Toast.makeText(requireContext(), "Some problems", Toast.LENGTH_LONG)
+        })
+
         return binding.root
     }
 

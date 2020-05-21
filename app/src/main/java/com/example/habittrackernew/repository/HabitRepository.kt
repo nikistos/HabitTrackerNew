@@ -14,37 +14,24 @@ class HabitRepository(private val database: HabitDao, private val token: String)
 
     suspend fun refreshDatabase() {
         withContext(Dispatchers.IO) {
-
-            try {
-                var habitsFromNetworkContainer = doubletApi.getHabits(token)
-                database.insertHabitsList(habitsFromNetworkContainer.map {
-                    it.asLocalModel()
-                })
-            } catch (e: Exception) {
-
-            }
+            var habitsFromNetworkContainer = doubletApi.getHabits(token)
+            database.insertHabitsList(habitsFromNetworkContainer.map {
+                it.asLocalModel()
+            })
         }
     }
 
     suspend fun addHabit(habit: HabitEntity) {
         withContext(Dispatchers.IO) {
-//            try {
-                var habitUid = doubletApi.insertHabit(token, habit.asNetworkModel())
-                database.insert(habit.apply { uid = habitUid.uid })
-//            } catch (e: Exception) {
-
-//            }
+            var habitUid = doubletApi.insertHabit(token, habit.asNetworkModel())
+            database.insert(habit.apply { uid = habitUid.uid })
         }
     }
 
     suspend fun updateHabit(habit: HabitEntity) {
         withContext(Dispatchers.IO) {
-            try {
-                var habitUid = doubletApi.updateHabit(token, habit.asNetworkModel())
-                database.update(habit)
-            } catch (e: Exception) {
-
-            }
+            var habitUid = doubletApi.updateHabit(token, habit.asNetworkModel())
+            database.update(habit)
         }
     }
 }

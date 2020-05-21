@@ -1,19 +1,24 @@
 package com.example.habittrackernew.list_of_habits
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.habittrackernew.database.HabitDao
 import com.example.habittrackernew.database.HabitEntity
 import com.example.habittrackernew.database.HabitType
 import com.example.habittrackernew.repository.HabitRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import java.lang.Exception
 
 class ListViewModel(private val database: HabitDao, token: String) : ViewModel() {
 
     var habits = database.getAllHabits()
     private val repository = HabitRepository(database, token)
+
+    private val _showErrorToast: MutableLiveData<Boolean> = MutableLiveData()
+    val showErrorToast: LiveData<Boolean>
+        get() = _showErrorToast
 
     private val viewModelJob = SupervisorJob()
 
@@ -34,8 +39,11 @@ class ListViewModel(private val database: HabitDao, token: String) : ViewModel()
 
     private fun refreshHabitListFromRepository() {
         viewModelScope.launch {
-            repository.refreshDatabase()
+            try {
+                repository.refreshDatabase()
+            } catch (e: Exception) {
+                _showErrorToast.value = true
+            }
         }
     }
-
 }
