@@ -2,41 +2,42 @@
     <string name="app_name">HabitTrackerNew</string>
     <string name="examplePriorityLetter">P</string>
     <string name="habitName">ЧТЕНИЕ ПО УТРАМ</string>
-    <string name="priority">ПРИОРИТЕТ</string>
-    <string name="repeat">ПОВТОРЯТЬ</string>
+    <string name="priority">PRIORITY</string>
+    <string name="repeat">REPEAT</string>
     <string name="exampleRepeatCount">10</string>
-    <string name="high">СРЕДНИЙ</string>
-    <string name="examplePeriod">В НЕДЕЛЮ</string>
+    <string name="high">MEDIUM</string>
+    <string name="examplePeriod">AT WEEK</string>
     <string name="descriptionExample">Читать 10 минут каждое утро</string>
     <string name="typeExample">ПОЛЕЗНАЯ</string>
     <string name="name">Что будем делать?</string>
     <string name="description">А поподробнее</string>
     <string name="priority2">Насколько это важно?</string>
-    <string name="frequency">Как часто?</string>
-    <string name="times">раз каждый(ую)</string>
+    <string name="frequency">How often</string>
+    <string name="times">times per</string>
     <string name="color">Цвет для привычки</string>
-    <string name="actionEditLabel">РЕДАКТИРОВАНИЕ ПРИВЫЧКИ</string>
-    <string name="hintHabitName">"Название "</string>
-    <string name="hintHabitDescription">Описание</string>
-    <string name="GoodHeader">ПОЛЕЗНАЯ</string>
-    <string name="BadHeader">ВРЕДНАЯ</string>
-    <string name="hintPriority">Приоритет привычки</string>
-    <string name="hintCountRepeat">Повтор</string>
-    <string name="hintEvery">каждый(-ую)</string>
-    <string name="labelTimes">раз</string>
-    <string name="newHabit">ДОБАВИТЬ</string>
-    <string name="save">сохранить</string>
-    <string name="add">добавить</string>
+    <string name="actionEditLabel">EDIT HABIT</string>
+    <string name="hintHabitName">"Name"</string>
+    <string name="hintHabitDescription">Description</string>
+    <string name="GoodHeader">GOOD</string>
+    <string name="BadHeader">BAD</string>
+    <string name="hintPriority">Habit priority</string>
+    <string name="hintCountRepeat">Repeat</string>
+    <string name="hintEvery">every</string>
+    <string name="labelTimes">times</string>
+    <string name="newHabit">ADD</string>
+    <string name="save">SAVE</string>
+    <string name="add">add</string>
     <string name="exampleDescription">Akdnla</string>
     <string-array name="habitPriorities">
-        <item>Низкий</item>
-        <item>Средний</item>
-        <item>Высокий</item>
+        <item>Low</item>
+        <item>Medium</item>
+        <item>High</item>
     </string-array>
     <string-array name="habitPeriods">
-        <item>день</item>
-        <item>неделя</item>
-        <item>месяц</item>
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
     </string-array>
     <string name="authToken">2a895010-243a-48a0-8609-0144ba8e9774</string>
+    <string name="atPeriod">AT %s</string>
 </resources>

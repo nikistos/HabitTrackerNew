@@ -14,7 +14,7 @@ interface HabitDao {
     fun update(habit: HabitEntity)
 
     @Query("SELECT * FROM habits WHERE uid = :key")
-    fun getHabitById(key: String): LiveData<HabitEntity>
+    fun getHabitById(key: String): HabitEntity
 
     @Query("SELECT * FROM habits")
     fun getAllHabits(): LiveData<List<HabitEntity>>

@@ -8,14 +8,14 @@ import com.example.habittrackernew.R
 import com.example.habittrackernew.network.NetworkHabit
 
 @Entity(tableName = "habits")
-@TypeConverters(PriorityConverter::class, TypeHabitConverter::class)
+@TypeConverters(PriorityConverter::class, TypeHabitConverter::class, FrequencyConverter::class)
 data class HabitEntity(
     @PrimaryKey
     var uid: String = "",
     var title: String = "",
     var date: Int = 0,
     var description: String = "",
-    var frequency: Int = 0,
+    var frequency: Frequecy = Frequecy.Day,
     var priority: HabitPriority = HabitPriority.Low,
     var type: HabitType = HabitType.Good,
     var count: Int = 0,
@@ -23,15 +23,19 @@ data class HabitEntity(
 ) {
     fun asNetworkModel(): NetworkHabit {
         return NetworkHabit(
-            uid = this.uid,
+            uid = if (this.uid.isEmpty()) null else this.uid,
             title = this.title,
             date = this.date,
             description = this.description,
-            frequency = this.frequency,
             priority = PriorityConverter().fromEnum(this.priority),
             type = TypeHabitConverter().fromEnum(this.type),
             color = this.color,
-            count = this.count
+            count = this.count,
+            frequency = when (this.frequency) {
+                Frequecy.Day -> 1
+                Frequecy.Week -> 7
+                Frequecy.Month -> 30
+            }
         )
     }
 }

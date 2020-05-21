@@ -1,12 +1,9 @@
 package com.example.habittrackernew.network
 
+import android.renderscript.RenderScript
 import androidx.room.Ignore
-import com.example.habittrackernew.database.HabitEntity
-import com.example.habittrackernew.database.PriorityConverter
-import com.example.habittrackernew.database.TypeHabitConverter
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.JsonQualifier
+import com.example.habittrackernew.database.*
+import com.squareup.moshi.*
 
 @JsonClass(generateAdapter = true)
 data class Error(
@@ -29,20 +26,29 @@ data class NetworkHabit(
     val priority: Int = 0,
     val title: String = "",
     val type: Int = 0,
-    val uid: String = ""
+    val uid: String? = null
 ) {
     fun asLocalModel(): HabitEntity {
         return HabitEntity(
-            uid = this.uid,
+            uid = this.uid ?: "",
             title = this.title,
             date = this.date,
             description = this.description,
-            frequency = this.frequency,
             priority = PriorityConverter().toEnum(this.priority),
             type = TypeHabitConverter().toEnum(this.type),
             count = this.count,
-            color = this.color
+            color = this.color,
+            frequency = when (this.frequency) {
+                30 -> Frequecy.Month
+                7 -> Frequecy.Week
+                else -> Frequecy.Day
+            }
         )
     }
 }
 
+@JsonClass(generateAdapter = false)
+data class HabitsGetResponse(
+    val networkHabitList: List<NetworkHabit> = listOf(),
+    val error: Error = Error()
+)
