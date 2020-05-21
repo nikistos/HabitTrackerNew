@@ -2,12 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
 
-
-        <import type="com.example.habittrackernew.database.HabitType"/>
-
+        <import type="com.example.habittrackernew.database.HabitType" />
+        <import type="com.example.habittrackernew.binding_methods.EditorBindingMethods"/>
 
         <variable
             name="viewModel"
@@ -44,10 +42,10 @@
                     android:hint="@string/hintHabitName"
                     android:inputType="text"
                     android:maxLines="1"
+                    android:text="@={viewModel.editableHabit.title}"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
-                    android:textSize="38sp"
-                    android:text="@={viewModel.editableHabit.title}"/>
+                    android:textSize="38sp" />
 
                 <RadioGroup
                     android:id="@+id/radioGroupType"
@@ -55,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    android:checkedButton="@{viewModel.editableHabit.type == HabitType.Good ? @id/radioGood : @id/radioBad}">
+                    android:checkedButton="@={EditorBindingMethods.INSTANCE.habitTypeToButtonId(viewModel.editableHabit.type)}">
 
                     <RadioButton
                         android:id="@+id/radioGood"
@@ -129,9 +127,9 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/selector_drop_down_menu"
                             android:hint="@string/hintHabitDescription"
+                            android:text="@={viewModel.editableHabit.description}"
                             android:textColorHint="@color/textHintsColor"
-                            android:textSize="18sp"
-                            android:text="@={viewModel.editableHabit.description}"/>
+                            android:textSize="18sp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -164,11 +162,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/selector_drop_down_menu"
+                            android:filterTouchesWhenObscured="false"
                             android:editable="false"
                             android:hint="@string/hintPriority"
                             android:inputType="text"
-                            android:textColorHint="@color/textHintsColor"
-                            />
+                            android:text="@={EditorBindingMethods.INSTANCE.priorityToText(viewModel.editableHabit.priority)}"
+                            android:textColorHint="@color/textHintsColor" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageView
@@ -201,9 +200,9 @@
                             android:background="@drawable/selector_drop_down_menu"
                             android:hint="@string/hintCountRepeat"
                             android:inputType="number"
+                            android:text='@={EditorBindingMethods.INSTANCE.habitCountToText(viewModel.editableHabit.count)}'
                             android:textAlignment="center"
-                            android:textColorHint="@color/textHintsColor"
-                            android:text='@{viewModel.isNewHabit ? Integer.toString(viewModel.editableHabit.count) : ""}'/>
+                            android:textColorHint="@color/textHintsColor" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textview.MaterialTextView
@@ -236,10 +235,10 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/selector_drop_down_menu"
                             android:editable="false"
-                            android:hint="@string/hintEvery"
+                            android:text="@={EditorBindingMethods.INSTANCE.frequencyToText(viewModel.editableHabit.frequency)}"
                             android:inputType="text"
                             android:textAlignment="center"
-                            android:textColorHint="@color/textHintsColor"/>
+                            android:textColorHint="@color/textHintsColor" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -253,9 +252,9 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/save"
+                android:onClick="@{()->viewModel.saveHabit()}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardViewDescription"
-                android:onClick="@{() -> viewModel.saveHabit()}"/>
+                app:layout_constraintTop_toBottomOf="@+id/cardViewDescription" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

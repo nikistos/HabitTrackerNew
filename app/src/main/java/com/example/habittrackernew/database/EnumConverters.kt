@@ -16,3 +16,10 @@ class TypeHabitConverter {
     @TypeConverter
     fun toEnum(ordinal: Int) = HabitType.values().first {it.ordinal == ordinal}
 }
+
+class FrequencyConverter {
+    @TypeConverter
+    fun fromEnum(enum: Frequecy) = enum.ordinal
+    @TypeConverter
+    fun toEnum(ordinal: Int) = Frequecy.values().first {it.ordinal == ordinal}
+}

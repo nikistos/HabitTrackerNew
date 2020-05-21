@@ -28,19 +28,19 @@ class HabitRepository(private val database: HabitDao, private val token: String)
 
     suspend fun addHabit(habit: HabitEntity) {
         withContext(Dispatchers.IO) {
-            try {
+//            try {
                 var habitUid = doubletApi.insertHabit(token, habit.asNetworkModel())
                 database.insert(habit.apply { uid = habitUid.uid })
-            } catch (e: Exception) {
+//            } catch (e: Exception) {
 
-            }
+//            }
         }
     }
 
     suspend fun updateHabit(habit: HabitEntity) {
         withContext(Dispatchers.IO) {
             try {
-                var habidUid = doubletApi.updateHabit(token, habit.asNetworkModel())
+                var habitUid = doubletApi.updateHabit(token, habit.asNetworkModel())
                 database.update(habit)
             } catch (e: Exception) {
 

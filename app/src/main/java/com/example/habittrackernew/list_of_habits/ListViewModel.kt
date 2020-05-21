@@ -10,11 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
-class ListViewModel(private val database: HabitDao, private val token: String) : ViewModel() {
+class ListViewModel(private val database: HabitDao, token: String) : ViewModel() {
 
     var habits = database.getAllHabits()
     private val repository = HabitRepository(database, token)
-
 
     private val viewModelJob = SupervisorJob()
 

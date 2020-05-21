@@ -1,10 +1,10 @@
 package com.example.habittrackernew.editor
 
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import com.example.habittrackernew.database.HabitDao
 import com.example.habittrackernew.database.HabitEntity
 import com.example.habittrackernew.repository.HabitRepository
@@ -12,14 +12,13 @@ import kotlinx.coroutines.*
 import java.util.*
 import kotlin.coroutines.CoroutineContext
 
-class EditorViewModel(private val database: HabitDao, habitId: String?, token: String) :
+
+class EditorViewModel(database: HabitDao, habitId: String?, token: String) :
     ViewModel(), CoroutineScope {
 
     private val repository = HabitRepository(database, token)
 
-    var editableHabit = if (habitId != null)
-        database.getHabitById(habitId)
-    else MutableLiveData(HabitEntity())
+    val editableHabit = if (habitId == null) HabitEntity() else database.getHabitById(habitId)
 
     val isNewHabit = (habitId == null)
 
@@ -27,8 +26,10 @@ class EditorViewModel(private val database: HabitDao, habitId: String?, token: S
     val eventEditionFinished: LiveData<Boolean>
         get() = _eventEditionFinished
 
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
+
 
     override fun onCleared() {
         super.onCleared()
@@ -39,13 +40,14 @@ class EditorViewModel(private val database: HabitDao, habitId: String?, token: S
         setEditTime()
         withContext(Dispatchers.IO) {
             if (isNewHabit)
-                repository.addHabit(editableHabit.value!!)
-            else repository.updateHabit(editableHabit.value!!)
+                repository.addHabit(editableHabit)
+            else repository.updateHabit(editableHabit)
         }
         _eventEditionFinished.value = true
     }
 
     private fun setEditTime() {
-        editableHabit.value?.date = (Date().time/1000).toInt()
+        editableHabit.date = (Date().time / 1000).toInt()
     }
+
 }
