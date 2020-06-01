@@ -1,2 +1,4 @@
+include ':Data'
 rootProject.name='HabitTrackerNew'
-include ':app'
+include ':Presentation'
+include ':Domain'
