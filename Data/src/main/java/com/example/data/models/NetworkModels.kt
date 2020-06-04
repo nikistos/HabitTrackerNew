@@ -23,5 +23,6 @@ data class NetworkHabit(
     val priority: Int = 0,
     val title: String = "",
     val type: Int = 0,
-    val uid: String? = null
+    val uid: String? = null,
+    val done_dates: Array<Int> = arrayOf()
 )

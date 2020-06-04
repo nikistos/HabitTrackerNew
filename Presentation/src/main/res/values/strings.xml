@@ -40,4 +40,8 @@
     </string-array>
     <string name="authToken">2a895010-243a-48a0-8609-0144ba8e9774</string>
     <string name="atPeriod">AT %s</string>
+    <string name="goodEnough">You are breathtaking!</string>
+    <string name="goodNotEnough">Стоит выполнить еще %s раз</string>
+    <string name="badEnough">Хватит это делать</string>
+    <string name="badNotEnough">Можете выполнить еще %s раз</string>
 </resources>

@@ -1,13 +1,10 @@
 package com.example.habittrackernew.editor
 
-import android.content.Context
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Filter
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
@@ -15,10 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.example.data.database.DatabaseModule
+import com.example.data.repository.RepositoryModule
 import com.example.habittrackernew.R
 import com.example.habittrackernew.databinding.FragmentEditorBinding
 import com.example.habittrackernew.di.AppComponent
 import com.example.habittrackernew.di.DaggerAppComponent
+import com.example.habittrackernew.di.HabitTrackerApplication
 
 class EditorFragment : Fragment() {
 
@@ -29,8 +29,6 @@ class EditorFragment : Fragment() {
 
     private lateinit var viewModel: EditorViewModel
     private lateinit var binding: FragmentEditorBinding
-    private lateinit var component: AppComponent
-    //private lateinit var database: HabitDao
 
 
     private var habitId: String? = null
@@ -44,12 +42,12 @@ class EditorFragment : Fragment() {
 
         arguments?.getString(HABIT_ID)?.let { habitId = it }
 
+        val habitService =
+            (requireActivity().application as HabitTrackerApplication).appComponent.getHabitProcessingService()
 
-        //database = AppDataBase.getInstance(requireContext()).habitDao()
-        val token = resources.getString(R.string.authToken)
 
-        //val factory = EditorViewModelFactory(database, habitId, token)
-        //viewModel = ViewModelProviders.of(this, factory).get(EditorViewModel::class.java)
+        val factory = EditorViewModelFactory(habitService, habitId)
+        viewModel = ViewModelProviders.of(this, factory).get(EditorViewModel::class.java)
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -59,7 +57,8 @@ class EditorFragment : Fragment() {
         )
 
         viewModel.eventEditionFinished.observe(viewLifecycleOwner, Observer { finished ->
-            if (finished) this.findNavController().navigate(R.id.action_editorFragment_to_habitViewPagerFragment)
+            if (finished) this.findNavController()
+                .navigate(R.id.action_editorFragment_to_habitViewPagerFragment)
         })
 
         viewModel.showErrorToast.observe(viewLifecycleOwner, Observer { toShow ->

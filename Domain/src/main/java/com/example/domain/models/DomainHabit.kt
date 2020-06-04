@@ -9,7 +9,8 @@ class DomainHabit(
     var priority: HabitPriority = HabitPriority.Low,
     var type: HabitType = HabitType.Good,
     var count: Int = 0,
-    var color: Int = 0
+    var color: Int = 0,
+    var done_dates: MutableList<Int> = mutableListOf()
 )
 
 

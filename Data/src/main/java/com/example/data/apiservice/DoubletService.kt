@@ -1,10 +1,8 @@
 package com.example.data.apiservice
 
 import com.example.data.models.*
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.PUT
+import com.example.domain.models.HabitDone
+import retrofit2.http.*
 
 interface DoubletService {
 
@@ -22,4 +20,7 @@ interface DoubletService {
         @Header("Authorization") authorization: String,
         @Body habit: NetworkHabit
     ): HabitUid
+
+    @POST("api/habit_done")
+    suspend fun processHabitDone( @Header("Authorization") authorization: String, @Body habitDone: HabitDone)
 }

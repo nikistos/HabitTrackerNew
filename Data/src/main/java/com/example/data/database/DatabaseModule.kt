@@ -18,6 +18,7 @@ class DatabaseModule(private val context: Context) {
             "habitDatabase"
         )
             .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
             .build()
     }
 

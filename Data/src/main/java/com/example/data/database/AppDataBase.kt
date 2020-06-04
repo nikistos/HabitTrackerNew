@@ -8,7 +8,7 @@ import androidx.room.Room
 import javax.inject.Inject
 
 
-@Database(entities = [HabitEntity::class], version = 1)
+@Database(entities = [HabitEntity::class], version = 2)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun habitDao(): HabitDao
 

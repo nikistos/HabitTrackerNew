@@ -10,12 +10,20 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.data.database.DatabaseModule
+import com.example.data.repository.RepositoryModule
 import com.example.domain.models.HabitType
+import com.example.domain.usecases.HabitProcessingService
 import com.example.habittrackernew.R
 import com.example.habittrackernew.databinding.FragmentListRecyclerViewBinding
+import com.example.habittrackernew.di.DaggerAppComponent
+import com.example.habittrackernew.di.HabitTrackerApplication
+import com.example.habittrackernew.editor.EditorFragment
 import kotlinx.android.synthetic.main.fragment_list_recycler_view.*
-import java.lang.Appendable
+import javax.inject.Inject
 
 class ListFragment : Fragment() {
 
@@ -27,8 +35,10 @@ class ListFragment : Fragment() {
             .apply { arguments = bundleOf(HABIT_TYPE to type) }
     }
 
+    lateinit var habitService: HabitProcessingService
     lateinit var binding: FragmentListRecyclerViewBinding
     lateinit var viewModel: ListViewModel
+
 
 
     override fun onCreateView(
@@ -37,10 +47,10 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        //val database = AppDataBase.getInstance(requireContext()).habitDao()
-        val token = resources.getString(R.string.authToken)
-        //val viewModelFactory = ListViewModelFactory(database, token)
-        //viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
+        val habitService =
+            (requireActivity().application as HabitTrackerApplication).appComponent.getHabitProcessingService()
+        val viewModelFactory = ListViewModelFactory(habitService)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(ListViewModel::class.java)
 
         binding = DataBindingUtil.inflate(
             inflater,
@@ -50,7 +60,11 @@ class ListFragment : Fragment() {
         )
 
         viewModel.showErrorToast.observe(viewLifecycleOwner, Observer { toShow ->
-            if (toShow) Toast.makeText(requireContext(), "Some problems", Toast.LENGTH_LONG)
+            if (toShow) Toast.makeText(requireContext(), "Some problems", Toast.LENGTH_LONG).show()
+        })
+
+        viewModel.showHabitDoneMessage.observe(viewLifecycleOwner, Observer { toShow ->
+            if (toShow) Toast.makeText(requireContext(), "Habit done!", Toast.LENGTH_LONG).show()
         })
 
         return binding.root
@@ -60,7 +74,17 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val habitType = arguments?.getString(HABIT_TYPE) ?: GOOD_HABITS
-        val adapter = HabitRecyclerViewAdapter()
+        val adapter = HabitRecyclerViewAdapter(object: HabitItemActions {
+            override fun openHabit(habitUid: String) {
+                findNavController().navigate(
+                    R.id.action_habitViewPagerFragment_to_editorFragment,
+                    EditorFragment.getBundleWithHabitId(habitUid)
+                )
+            }
+            override fun doHabit(habitUid: String) {
+                viewModel.doHabit(habitUid)
+            }
+        })
         recyclerHabits.layoutManager = LinearLayoutManager(requireContext())
         recyclerHabits.adapter = adapter
 

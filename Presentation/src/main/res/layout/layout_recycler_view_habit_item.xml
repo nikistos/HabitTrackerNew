@@ -35,7 +35,7 @@
                 android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/leftConstraint"
+                    android:id="@+id/habitItemBody"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -129,11 +129,11 @@
                     android:layout_weight="1"
                     android:id="@+id/constraintLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/shape_rectangle_with_circle_side"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="8dp"
-                    app:layout_constraintStart_toEndOf="@+id/leftConstraint">
+                    app:layout_constraintStart_toEndOf="@+id/habitItemBody">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/habitType"
@@ -156,10 +156,22 @@
                         android:text="@{habit.description}"
                         android:textColor="#ffffff"
                         android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/habitType"
                         tools:text="@string/exampleDescription" />
+
+                    <ImageView
+                        android:id="@+id/buttonCheck"
+                        android:layout_width="160dp"
+                        android:layout_height="40dp"
+                        android:paddingHorizontal="60dp"
+                        android:src="@drawable/baseline_check_circle_outline_24"
+                        android:tint="@android:color/holo_green_light"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/habitDescription" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

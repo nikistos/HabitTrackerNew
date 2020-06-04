@@ -23,7 +23,8 @@ class HabitMapper @Inject constructor() {
                     Frequecy.Day -> 1
                     Frequecy.Week -> 7
                     Frequecy.Month -> 30
-                }
+                },
+                done_dates = this.done_dates.toTypedArray()
             )
         }
     }
@@ -43,7 +44,8 @@ class HabitMapper @Inject constructor() {
                     30 -> Frequecy.Month
                     7 -> Frequecy.Week
                     else -> Frequecy.Day
-                }
+                },
+                done_dates = this.done_dates.toMutableList()
             )
         }
     }
@@ -63,7 +65,8 @@ class HabitMapper @Inject constructor() {
                     30 -> Frequecy.Month
                     7 -> Frequecy.Week
                     else -> Frequecy.Day
-                }
+                },
+                done_dates = this.done_dates.toMutableList()
             )
         }
     }
@@ -83,7 +86,8 @@ class HabitMapper @Inject constructor() {
                     Frequecy.Day -> 1
                     Frequecy.Week -> 7
                     Frequecy.Month -> 30
-                }
+                },
+                done_dates = this.done_dates.toTypedArray()
             )
         }
     }
@@ -99,7 +103,8 @@ class HabitMapper @Inject constructor() {
                 type = this.type,
                 count = this.count,
                 color = this.color,
-                frequency = this.frequency
+                frequency = this.frequency,
+                done_dates = this.done_dates
             )
         }
     }
@@ -115,7 +120,8 @@ class HabitMapper @Inject constructor() {
                 type = this.type,
                 count = this.count,
                 color = this.color,
-                frequency = this.frequency
+                frequency = this.frequency,
+                done_dates = this.done_dates
             )
         }
     }

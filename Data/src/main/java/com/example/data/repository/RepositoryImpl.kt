@@ -4,6 +4,7 @@ import com.example.data.apiservice.DoubletService
 import com.example.data.database.HabitDao
 import com.example.data.mappers.HabitMapper
 import com.example.domain.models.DomainHabit
+import com.example.domain.models.HabitDone
 import com.example.domain.repositories.Repository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -41,6 +42,15 @@ class RepositoryImpl @Inject constructor(
         withContext(Dispatchers.IO) {
             var habitUid = apiService.updateHabit(token, mapper.domainToNetworkModel(habit))
             database.update(mapper.domainToEntity(habit))
+        }
+    }
+
+    override suspend fun processHabitDone(habitDone: HabitDone) {
+        withContext(Dispatchers.IO) {
+            apiService.processHabitDone(token, habitDone)
+            val habitToUpdate = database.getHabitById(habitDone.habit_uid)
+            habitToUpdate.done_dates.add(habitDone.date)
+            database.update(habitToUpdate)
         }
     }
 

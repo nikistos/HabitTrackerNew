@@ -15,12 +15,12 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class EditorViewModel (val useCases: HabitProcessingService, habitId: String?, token: String) :
+class EditorViewModel (val useCases: HabitProcessingService, habitId: String?) :
     ViewModel(), CoroutineScope {
 
     val editableHabit = if (habitId == null) DomainHabit() else useCases.getHabitById(habitId)
 
-    val isNewHabit = (habitId == null)
+    private val isNewHabit = (habitId == null)
 
     private val _eventEditionFinished = MutableLiveData<Boolean>()
     val eventEditionFinished: LiveData<Boolean>
@@ -40,7 +40,7 @@ class EditorViewModel (val useCases: HabitProcessingService, habitId: String?, t
         coroutineContext.cancelChildren()
     }
 
-    fun saveHabit() = viewModelScope.launch {
+        fun saveHabit() = viewModelScope.launch {
         setEditTime()
         try {
             if (isNewHabit)

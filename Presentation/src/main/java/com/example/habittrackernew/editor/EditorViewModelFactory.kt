@@ -6,10 +6,9 @@ import com.example.domain.usecases.HabitProcessingService
 
 class EditorViewModelFactory(
     private val useCases: HabitProcessingService,
-    private val habitId: String? = null,
-    private val token: String
+    private val habitId: String? = null
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return EditorViewModel(useCases, habitId, token) as T
+        return EditorViewModel(useCases, habitId) as T
     }
 }

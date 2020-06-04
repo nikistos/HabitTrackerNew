@@ -1,6 +1,7 @@
 package com.example.domain.repositories
 
 import com.example.domain.models.DomainHabit
+import com.example.domain.models.HabitDone
 import kotlinx.coroutines.flow.Flow
 
 
@@ -14,4 +15,6 @@ interface Repository {
     suspend fun addHabit(habit: DomainHabit)
 
     suspend fun updateHabit(habit: DomainHabit)
+
+    suspend fun processHabitDone(habitDone: HabitDone)
 }

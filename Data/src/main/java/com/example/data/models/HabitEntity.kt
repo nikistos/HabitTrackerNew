@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.example.domain.models.*
 
 @Entity(tableName = "habits")
-@TypeConverters(PriorityConverter::class, TypeHabitConverter::class, FrequencyConverter::class)
+@TypeConverters(PriorityConverter::class, TypeHabitConverter::class, FrequencyConverter::class, ListConverter::class)
 data class HabitEntity(
     @PrimaryKey
     var uid: String = "",
@@ -17,5 +17,6 @@ data class HabitEntity(
     var priority: HabitPriority = HabitPriority.Low,
     var type: HabitType = HabitType.Good,
     var count: Int = 0,
-    var color: Int = 0
+    var color: Int = 0,
+    var done_dates: MutableList<Int> = mutableListOf()
 )
